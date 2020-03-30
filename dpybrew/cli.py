@@ -56,25 +56,26 @@ def extension_list(filepath):
 
 
 @main.command(name='install')
-@click.argument('name', nargs=1)
-def install_extension(name):
-    click.echo(f'Collectiong {name}')
-    target = ""
-    if name.startswith("git+"):
-        target = name[4:]
-    else:
-        with urllib.request.urlopen(GIST_URL) as response:
-            html = response.read()
-        data = yaml.safe_load(html)
-        if name in data.keys():
-            target = data[name]
+@click.argument('names', nargs=-1)
+def install_extension(names):
+    for name in names:
+        click.echo(f'Collectiong {name}')
+        target = ""
+        if name.startswith("git+"):
+            target = name[4:]
+        else:
+            with urllib.request.urlopen(GIST_URL) as response:
+                html = response.read()
+            data = yaml.safe_load(html)
+            if name in data.keys():
+                target = data[name]
 
-    if target == "":
-        error(f'  Could not find module "{name}"')
-        return
+        if target == "":
+            error(f'  Could not find module "{name}"')
+            continue
 
-    Git().clone(target)
-    click.echo(f'Successfully installed {name}')
+        Git().clone(target)
+        click.echo(f'Successfully installed {name}')
 
 
 if __name__ == "__main__":
