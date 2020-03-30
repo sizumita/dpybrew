@@ -14,16 +14,19 @@ def print_version(ctx, param, value):
     ctx.exit()
 
 
-@click.command()
+@click.group(invoke_without_command=True)
 @click.option('--version', is_flag=True, callback=print_version,
               expose_value=False, is_eager=True)
-def main(args=None):
+@click.pass_context
+def main(ctx, args=None):
     """Console script for dpybrew."""
+    if ctx.invoked_subcommand:
+        return
     click.echo(f'dpybrew {__version__}')
     return 0
 
 
-@click.command(name='list')
+@main.command(name='list')
 @click.argument('filepath', nargs=1, default='.')
 def extension_list(filepath):
     """Show list of extensions."""
