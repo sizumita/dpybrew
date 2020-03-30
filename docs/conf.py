@@ -47,8 +47,8 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'dpybrew'
-copyright = "2020, Sumito Izumita"
-author = "Sumito Izumita"
+copyright = "2020, sizumita"
+author = "sizumita"
 
 # The version info for the project you're documenting, acts as replacement
 # for |version| and |release|, also used in various other places throughout
