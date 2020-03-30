@@ -40,7 +40,7 @@ class PyExtension(BaseExtension):
 
         try:
             self.module = import_module(str(self.path).replace('/', '.')[:-3])
-        except Exception:
+        except Exception as e:
             print(e)
             self.module = None
 
