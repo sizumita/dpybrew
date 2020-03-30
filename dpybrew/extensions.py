@@ -1,4 +1,3 @@
-import pathlib
 from importlib import import_module
 
 
@@ -14,7 +13,8 @@ class FileExtension(BaseExtension):
 
         try:
             self.module = import_module(str(self.path).replace('/', '.'))
-        except Exception:
+        except Exception as e:
+            print(e)
             self.module = None
 
     def has_setup(self):
@@ -41,6 +41,7 @@ class PyExtension(BaseExtension):
         try:
             self.module = import_module(str(self.path).replace('/', '.')[:-3])
         except Exception:
+            print(e)
             self.module = None
 
     def has_setup(self):
