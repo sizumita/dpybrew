@@ -57,7 +57,8 @@ def extension_list(filepath):
 
 @main.command(name='install')
 @click.argument('names', nargs=-1)
-def install_extension(names):
+@click.option('-dir', default='.', help='Download directory path.')
+def install_extension(names, dir):
     for name in names:
         click.echo(f'Collectiong {name}')
         target = ""
@@ -73,8 +74,7 @@ def install_extension(names):
         if target == "":
             error(f'  Could not find module "{name}"')
             continue
-
-        Git().clone(target)
+        Git(str(pathlib.Path(dir).resolve())).clone(target)
         click.echo(f'Successfully installed {name}')
 
 

@@ -11,7 +11,11 @@ class BaseExtension:
 class FileExtension(BaseExtension):
     def __init__(self, path):
         super().__init__(path)
-        self.module = import_module(str(self.path).replace('/', '.'))
+
+        try:
+            self.module = import_module(str(self.path).replace('/', '.'))
+        except Exception:
+            self.module = None
 
     def has_setup(self):
         try:
@@ -33,7 +37,11 @@ class FileExtension(BaseExtension):
 class PyExtension(BaseExtension):
     def __init__(self, path):
         super().__init__(path)
-        self.module = import_module(str(self.path).replace('/', '.')[:-3])
+
+        try:
+            self.module = import_module(str(self.path).replace('/', '.')[:-3])
+        except Exception:
+            self.module = None
 
     def has_setup(self):
         try:
