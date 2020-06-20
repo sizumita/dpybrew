@@ -68,6 +68,35 @@ or
 
 All extensions -> https://gist.github.com/sizumita/19ec79e3ad0ecfae89cca665ddf717e1
 
+--------
+Services
+--------
+
+Pagenator
+---------
+
+.. code-block:: python
+
+    import discord
+    from dpybrew.service import Pagenator
+
+    class MyPagenator(Pagenator):
+        def get_embed(self, page):
+            embed = discord.Embed(title=str(page+1))
+            return embed
+
+    # in client
+    pagenator = Pagenator(client, 10)
+
+    # run
+    await pagenator.start(message)
+
+    # or
+    await pagenator.start_by_context(context)
+
+
+
+
 
 Features
 --------
