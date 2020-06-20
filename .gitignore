@@ -1,6 +1,6 @@
 # Jetbrains
 .idea/*
-
+test-bot/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

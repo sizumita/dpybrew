@@ -10,7 +10,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['Click>=7.0', 'GitPython>=3.1.0', 'PyYAML>=5.3.1']
+requirements = ['Click>=7.0', 'GitPython>=3.1.0', 'PyYAML>=5.3.1', 'discord.py>=1.3.3']
 
 setup_requirements = ['pytest-runner', ]
 
@@ -19,15 +19,12 @@ test_requirements = ['pytest>=3', ]
 setup(
     author="sizumita",
     author_email='',
-    python_requires='>=3.5',
+    python_requires='>=3.7',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
     ],
