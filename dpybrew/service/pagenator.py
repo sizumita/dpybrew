@@ -29,6 +29,7 @@ class Paginator:
             embed = await self.get_embed(page)
         else:
             embed = self.get_embed(page)
+        self.page = page
         await self.message.edit(embed=embed)
 
     async def forward(self):
@@ -59,12 +60,12 @@ class Paginator:
         embed = discord.Embed()
         return embed
 
-    def check(self, reaction, msg):
-        if msg.id != self.message.id:
+    def check(self, reaction, user):
+        if reaction.message.id != self.message.id:
             return False
-        if str(reaction.emoji) in self.reactions:
+        if str(reaction.emoji) not in self.reactions:
             return False
-        if reaction.user.id != self.author.id:
+        if user.id != self.author.id:
             return False
         return True
 
@@ -73,6 +74,10 @@ class Paginator:
             await self.message.remove_reaction(reaction, user)
         except Exception:  # TODO: ここを直す
             pass
+
+    async def add_reactions(self):
+        for emoji in self.reactions:
+            await self.message.add_reaction(emoji)
 
     async def wait_reaction(self):
         try:
@@ -102,6 +107,7 @@ class Paginator:
         else:
             embed = self.get_embed(0)
         self.message = await self.channel.send(embed=embed)
+        await self.add_reactions()
         if is_task:
             self.client.loop.create_task(self.loop())
             return
